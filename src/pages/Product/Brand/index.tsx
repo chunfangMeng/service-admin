@@ -12,11 +12,11 @@ const BrandList: React.FC = () => {
   const [ csrfToken, setCsrfToken ] = useState<string | undefined>()
   const [ editBrand, setEditBrand ] = useState<Product.BrandListItem | undefined>()
   const brandRef = useRef<ActionType>()
-  useRequest<{token: string}>(() => {
+  useRequest(() => {
     return getCsrfToken()
   }, {
     onSuccess: res => {
-      setCsrfToken(res as string)
+      setCsrfToken(res.data)
     }
   })
   const onRefresh = () => {

@@ -43,6 +43,11 @@ export default [
         name: 'product.category',
         component: './Product/Category'
       },
+      {
+        path: '/product/attr/label',
+        name: 'product.attr.label',
+        component: './Product/Attribute/'
+      }
     ],
   },
   {

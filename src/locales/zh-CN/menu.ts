@@ -56,5 +56,6 @@ export default {
   'menu.staff.staff.list': '员工列表',
   'menu.member': '会员管理',
   'menu.member.member.list': '会员列表',
-  'menu.personal': '会员中心'
+  'menu.personal': '会员中心',
+  'menu.product.product.attr.label': '商品属性组',
 };

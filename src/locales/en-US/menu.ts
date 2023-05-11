@@ -56,5 +56,6 @@ export default {
   'menu.staff.staff.list': 'Staff List',
   'menu.member': 'Member',
   'menu.member.member.list': 'Member List',
-  'menu.personal': 'Personal Center'
+  'menu.personal': 'Personal Center',
+  'menu.product.product.attr.label': 'Attribute Group',
 };
