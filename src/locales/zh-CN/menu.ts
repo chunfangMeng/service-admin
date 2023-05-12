@@ -58,4 +58,5 @@ export default {
   'menu.member.member.list': '会员列表',
   'menu.personal': '会员中心',
   'menu.product.product.attr.label': '商品属性组',
+  'menu.product.product.product': '商品'
 };

@@ -29,24 +29,29 @@ export default [
     component: './Welcome',
   },
   {
-    path: '/product',
+    path: '/shop',
     name: 'product',
     routes: [
-      { path: '/product', redirect: 'product/brand' },
+      { path: '/shop', redirect: 'shop/product/brand' },
       {
-        path: '/product/brand',
+        path: '/shop/product/brand',
         name: 'product.brand',
-        component: './Product/Brand'
+        component: './shop/Brand'
       },
       {
-        path: '/product/category',
+        path: '/shop/product/category',
         name: 'product.category',
-        component: './Product/Category'
+        component: './shop/Category'
       },
       {
-        path: '/product/attr/label',
+        path: '/shop/product/attr/label',
         name: 'product.attr.label',
-        component: './Product/Attribute/'
+        component: './shop/Attribute/'
+      },
+      {
+        path: '/shop/product/list',
+        name: 'product.product',
+        component: './shop/Product/'
       }
     ],
   },

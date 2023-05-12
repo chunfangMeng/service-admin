@@ -1,5 +1,5 @@
 import { getCsrfToken } from '@/services/common';
-import { changeAttrValueStatus, deleteAttributeValue, getAttributeGroupList } from '@/services/product/attribute';
+import { changeAttrValueStatus, deleteAttributeValue, getAttributeGroupList } from '@/services/shop/attribute';
 import { ActionType, PageContainer, ProTable, ProTableProps } from '@ant-design/pro-components';
 import { useIntl, useRequest } from '@umijs/max';
 import { Button, message, Popconfirm, Space, Switch } from 'antd';

@@ -1,4 +1,4 @@
-import { createProductBrand, editBrand, getBrandOptions } from '@/services/product/brand/list';
+import { createProductBrand, editBrand, getBrandOptions } from '@/services/shop/brand/list';
 import { DrawerForm, ProForm, ProFormInstance, ProFormSelect, ProFormText, ProSkeleton } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
 import React, { useRef, useEffect } from 'react';

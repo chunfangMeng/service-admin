@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { ActionType, PageContainer, ProColumns, ProTable } from '@ant-design/pro-components'
-import { deleteBrand, getBrandList } from '@/services/product/brand/list';
+import { deleteBrand, getBrandList } from '@/services/shop/brand/list';
 import { Button, message, Popconfirm } from 'antd';
 import EditBrand from './components/EditBrand';
 import { useIntl, useRequest } from '@umijs/max';

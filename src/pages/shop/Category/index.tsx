@@ -1,4 +1,4 @@
-import { getCategory } from '@/services/product/category';
+import { getCategory } from '@/services/shop/category';
 import { PageContainer, ProTable, ProTableProps } from '@ant-design/pro-components';
 import React from 'react';
 
