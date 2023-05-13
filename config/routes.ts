@@ -30,27 +30,27 @@ export default [
   },
   {
     path: '/shop',
-    name: 'product',
+    name: 'shop',
     routes: [
       { path: '/shop', redirect: 'shop/product/brand' },
       {
         path: '/shop/product/brand',
-        name: 'product.brand',
+        name: 'brand',
         component: './shop/Brand'
       },
       {
         path: '/shop/product/category',
-        name: 'product.category',
+        name: 'category',
         component: './shop/Category'
       },
       {
         path: '/shop/product/attr/label',
-        name: 'product.attr.label',
+        name: 'attr.label',
         component: './shop/Attribute/'
       },
       {
         path: '/shop/product/list',
-        name: 'product.product',
+        name: 'product',
         component: './shop/Product/'
       }
     ],

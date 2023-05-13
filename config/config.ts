@@ -113,7 +113,7 @@ export default defineConfig({
    * @doc https://umijs.org/docs/max/request
    */
   request: {
-    dataField: ''  // useRequest直接返回后端数据格式，不处理
+    dataField: ''  // useRequest直接返回后端
   },
   /**
    * @name 权限插件

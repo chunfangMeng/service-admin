@@ -29,7 +29,7 @@ export async function editBrand(record: Product.BrandListItem, headers?: { [key:
 }
 
 export async function createProductBrand(data: Product.CreateBrand, headers?: { [key: string]: any }) {
-  return request('/api/v1/stock/management/brand/', {
+  return request<API.Response<[]>>('/api/v1/stock/management/brand/', {
     method: 'POST',
     data: data,
     headers: headers

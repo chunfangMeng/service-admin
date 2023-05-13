@@ -31,7 +31,9 @@ const EditBrand: React.FC<EditBrandProps> = (props) => {
     if (props.open) {
       formRef.current?.resetFields()
       if (!props.initValues) {
-        formRef.current?.setFieldsValue({status: brandOptions.data?.status_options[0].value})
+        formRef.current?.setFieldsValue({
+          status: brandOptions.data?.data.status_options[0].value
+        })
       }
     }
   }, [props.open])
@@ -99,7 +101,7 @@ const EditBrand: React.FC<EditBrandProps> = (props) => {
           <ProFormSelect
             name="status"
             label="状态"
-            options={brandOptions.data?.status_options ?? []} />
+            options={brandOptions.data?.data.status_options ?? []} />
         </ProForm.Group>
       }
     </DrawerForm>

@@ -17,11 +17,12 @@ declare namespace Product {
     info: string;
     priority: number | null;
   }
+  type OptionItem = {
+    label: string;
+    value: string;
+  }
   type BrandOptions = {
-    status_options: ({
-      label: string;
-      value: string;
-    })[]
+    status_options: OptionItem[];
   }
 
   type CreateBrand = {

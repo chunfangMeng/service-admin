@@ -49,14 +49,14 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
-  'menu.product': '商品数据库',
-  'menu.product.product.brand': '品牌列表',
-  'menu.product.product.category': '分类',
+  'menu.shop': '商城商品',
+  'menu.shop.brand': '品牌列表',
+  'menu.shop.category': '分类',
   'menu.staff': '员工管理',
   'menu.staff.staff.list': '员工列表',
   'menu.member': '会员管理',
   'menu.member.member.list': '会员列表',
   'menu.personal': '会员中心',
-  'menu.product.product.attr.label': '商品属性组',
-  'menu.product.product.product': '商品'
+  'menu.shop.attr.label': '商品属性组',
+  'menu.shop.product': '商品'
 };
