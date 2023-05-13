@@ -5,10 +5,12 @@ import { Button, message, Popconfirm } from 'antd';
 import EditBrand from './components/EditBrand';
 import { useIntl, useRequest } from '@umijs/max';
 import { getCsrfToken } from '@/services/common';
+import BatchUpload from './components/BatchUpload';
 
 
 const BrandList: React.FC = () => {
   const [ editOpen, setEditOpen ] = useState(false)
+  const [ uploadVisible, setUploadVisible ] = useState(false)
   const [ csrfToken, setCsrfToken ] = useState<string | undefined>()
   const [ editBrand, setEditBrand ] = useState<Product.BrandListItem | undefined>()
   const brandRef = useRef<ActionType>()
@@ -142,6 +144,9 @@ const BrandList: React.FC = () => {
           showQuickJumper: true
         }}
         toolBarRender={() => [
+          <Button key="batch-update" onClick={() => setUploadVisible(true)}>
+            {intl.formatMessage({id: 'pages.batch.upload'})}
+          </Button>,
           <Button 
             key="createBrand"
             type="primary"
@@ -171,6 +176,10 @@ const BrandList: React.FC = () => {
         initValues={editBrand}
         csrfToken={csrfToken}
         onRefresh={onRefresh} />
+      <BatchUpload 
+        open={uploadVisible}
+        csrftoken={csrfToken}
+        onOpenChange={setUploadVisible}/>
     </PageContainer>
   );
 }

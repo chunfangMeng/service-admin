@@ -53,4 +53,5 @@ export default {
   'pages.sort': '排序',
   'pages.sort.tip': '数字越大排名越靠前',
   'pages.search.keyword': '关键词',
+  'pages.batch.upload': '批量上传',
 };

@@ -56,4 +56,5 @@ export default {
   'pages.sort': 'Sort',
   'pages.sort.tip': 'The higher the number, the higher the ranking',
   'pages.search.keyword': 'keyword',
+  'pages.batch.upload': 'Batch Upload',
 };
