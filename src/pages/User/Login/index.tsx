@@ -27,7 +27,7 @@ const Login: React.FC = () => {
     return getCaptchaCode()
   }, {
     onSuccess: res => {
-      loginRef.current?.setFieldsValue({'hash_key': res.hash_key})
+      loginRef.current?.setFieldsValue({'hash_key': res.data.hash_key})
     }
   })
 
@@ -189,7 +189,7 @@ const Login: React.FC = () => {
                 className='h-10 max-h-10 mb-6'
                 preview={false}
                 onClick={() => captcha.run()}
-                src={typeof captcha.data === "undefined" ? undefined : `data:image/png;base64, ${captcha.data?.base64_image}`}/>
+                src={typeof captcha.data === "undefined" ? undefined : `data:image/png;base64, ${captcha.data.data.base64_image}`}/>
             </Space>
           </>
 

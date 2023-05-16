@@ -14,5 +14,14 @@ declare namespace ProductModule {
     product_brand: number;
     spu_number: string;
     sub_name: string;
+    attr_group: ProductAttr.AttrGroup[];
+  }
+
+  type ProductImage = {
+    id: number;
+    img_path: string;
+    is_main: boolean;
+    priority: number;
+    product: number;
   }
 }

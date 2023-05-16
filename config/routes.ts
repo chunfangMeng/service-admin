@@ -49,9 +49,15 @@ export default [
         component: './shop/Attribute/'
       },
       {
-        path: '/shop/product/list',
+        path: '/shop/product/',
         name: 'product',
         component: './shop/Product/'
+      },
+      {
+        path: '/shop/product/:id',
+        name: 'product.detail',
+        component: './shop/Product/$id.tsx',
+        hideInMenu: true
       }
     ],
   },

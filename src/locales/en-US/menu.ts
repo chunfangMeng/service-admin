@@ -59,4 +59,5 @@ export default {
   'menu.personal': 'Personal Center',
   'menu.shop.attr.label': 'Attribute Group',
   'menu.shop.product': 'Product',
+  'menu.shop.product.detail': 'Product Detail',
 };

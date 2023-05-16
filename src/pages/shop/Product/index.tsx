@@ -1,6 +1,7 @@
 import { getShopProducts } from '@/services/shop/product/list';
-import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { PlusOutlined, RightOutlined, UploadOutlined } from '@ant-design/icons';
 import { EditableProTable, PageContainer, ProColumns, QueryFilter, ProFormDateRangePicker, ProFormText } from '@ant-design/pro-components';
+import { Link } from '@umijs/max';
 import { Button, Space } from 'antd';
 import React, { useState } from 'react';
 
@@ -14,9 +15,11 @@ const ProductList: React.FC = () => {
   }, {
     title: '商品名称',
     dataIndex: 'name',
+    width: '16%',
   }, {
     title: '副标题',
     dataIndex: 'sub_name',
+    width: '16%',
   }, {
     title: '货号',
     dataIndex: 'item_no',
@@ -39,10 +42,14 @@ const ProductList: React.FC = () => {
     title: '操作',
     dataIndex: 'actions',
     valueType: 'option',
+    width: '16%',
     render: (text, record, _, action) => (
-      <Space>
-        <Button ghost type="primary" onClick={() => {action?.startEditable?.(record.id);}}>编辑</Button>
-        <Button danger>删除</Button>
+      <Space wrap>
+        <Button size="small" ghost type="primary" onClick={() => {action?.startEditable?.(record.id);}}>编辑</Button>
+        <Button danger size="small">删除</Button>
+        <Button type="link" size="small" icon={<RightOutlined />}>
+          <Link to={`/shop/product/${record.id}`}>详情</Link>
+        </Button>
       </Space>
     )
   }]
@@ -63,6 +70,9 @@ const ProductList: React.FC = () => {
       <EditableProTable<ProductModule.ProductItem> 
         columns={columns}
         rowKey="id"
+        scroll={{
+          x: 960,
+        }}
         recordCreatorProps={false}
         toolBarRender={() => [
           <Space key={'toolbar-container'}>
