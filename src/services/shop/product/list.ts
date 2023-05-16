@@ -16,3 +16,16 @@ export async function getProductImages(productId: number | string) {
     method: 'GET'
   })
 }
+
+/**解绑商品的属性值 */
+export async function unbindProductAttr(productId: number | string, attrList: string[], csrfToken: string) {
+  return request<API.Response<[]>>(`/api/v1/stock/management/product/${productId}/unbind/attr/`, {
+    method: 'DELETE',
+    data: {
+      attr_value_code: attrList
+    },
+    headers: {
+      'X-CSRFToken': csrfToken
+    }
+  })
+}

@@ -1,16 +1,31 @@
+import { unbindProductAttr } from '@/services/shop/product/list';
 import { ActionType, ProTable, ProTableProps } from '@ant-design/pro-components';
-import { useIntl } from '@umijs/max';
-import { Button, Card } from 'antd';
+import { useIntl, useRequest } from '@umijs/max';
+import { Button, Card, message, Space } from 'antd';
 import { ExpandableConfig } from 'antd/es/table/interface';
 import React, { useEffect, useRef } from 'react';
 
 
 type ProductAttrProps = {
+  productId?: string;
   data?: ProductAttr.AttrGroup[];
+  csrfToken?: string;
+  onRefresh: () => void;
 }
 const ProductAttrGroup: React.FC<ProductAttrProps> = (props) => {
   const attrAction = useRef<ActionType>();
   const intl = useIntl()
+  const unbindAttr = useRequest((attrCodeList: string[]) => {
+    return unbindProductAttr(props.productId as string, attrCodeList,props.csrfToken as string)
+  }, {
+    manual: true,
+    onSuccess: res => {
+      if (res.code === 200) {
+        message.success(res.message);
+        props.onRefresh()
+      }
+    }
+  })
   const expandableAttr: ExpandableConfig<ProductAttr.AttrGroup> = {
     expandedRowRender: (record) => {
       const attrValue: ProTableProps<ProductAttr.AttributeValue, []> = {
@@ -20,6 +35,16 @@ const ProductAttrGroup: React.FC<ProductAttrProps> = (props) => {
         }, {
           title: intl.formatMessage({id: 'pages.attribute.group.value'}),
           dataIndex: 'attr_value',
+        }, {
+          title: intl.formatMessage({id: 'pages.actions'}),
+          dataIndex: 'actions',
+          render(_, attr) {
+            return (
+              <Space wrap>
+                <Button danger type="primary" loading={unbindAttr.loading} onClick={() => unbindAttr.run([attr.value_code])}>商品解绑</Button>
+              </Space>
+            )
+          },
         }],
         rowKey: 'id',
         search: false,
@@ -35,13 +60,13 @@ const ProductAttrGroup: React.FC<ProductAttrProps> = (props) => {
   }
   const productAttr: ProTableProps<ProductAttr.AttrGroup, any> = {
     columns: [{
-      title: '属性组',
+      title: intl.formatMessage({id: 'pages.attribute.group.name'}),
       dataIndex: 'name'
     }, {
-      title: '属性组代码',
+      title: intl.formatMessage({id: 'pages.attribute.group.code'}),
       dataIndex: 'code'
     }, {
-      title: '状态',
+      title: intl.formatMessage({id: 'pages.status'}),
       dataIndex: 'status',
       valueEnum: {
         0: {

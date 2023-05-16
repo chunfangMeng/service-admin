@@ -1,3 +1,4 @@
+import { getCsrfToken } from '@/services/common';
 import { getProductImages, getShopProductInfo } from '@/services/shop/product/list';
 import { PageContainer, ProDescriptions, ProDescriptionsActionType } from '@ant-design/pro-components';
 import { useParams, useRequest } from '@umijs/max';
@@ -10,8 +11,17 @@ import ProductAttrGroup from './components/ProductAttrGroup';
 const ProductDetail: React.FC = () => {
   const actionRef = useRef<ProDescriptionsActionType>();
   const params = useParams();
+  const csrf = useRequest(() => {
+    return getCsrfToken()
+  })
   const productInfo = useRequest(() => {
     return getShopProductInfo(parseInt(params.id as string))
+  }, {
+    onSuccess: res => {
+      if (res.code === 200) {
+        actionRef.current?.reload();
+      }
+    }
   })
   const productImage = useRequest(() => {
     return getProductImages(params.id as string)
@@ -36,7 +46,10 @@ const ProductDetail: React.FC = () => {
         </ProDescriptions>
       </Card>
       <ProductAttrGroup
-        data={productInfo.data?.data.attr_group} />
+        productId={params.id}
+        data={productInfo.data?.data.attr_group}
+        csrfToken={csrf.data?.data}
+        onRefresh={() => productInfo.run()} />
       <Card 
         className='mt-4'
         title="商品图片">
