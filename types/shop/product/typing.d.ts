@@ -24,4 +24,8 @@ declare namespace ProductModule {
     priority: number;
     product: number;
   }
+
+  type AttrGroupParams = {
+    is_show_all?: boolean;
+  } & API.PaginatorParams;
 }

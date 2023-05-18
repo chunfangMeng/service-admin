@@ -46,10 +46,10 @@ const ProductDetail: React.FC = () => {
         </ProDescriptions>
       </Card>
       <ProductAttrGroup
-        productId={params.id}
+        productid={params.id}
         data={productInfo.data?.data.attr_group}
-        csrfToken={csrf.data?.data}
-        onRefresh={() => productInfo.run()} />
+        csrftoken={csrf.data?.data}
+        refresh={() => productInfo.run()} />
       <Card 
         className='mt-4'
         title="商品图片">

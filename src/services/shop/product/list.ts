@@ -17,6 +17,19 @@ export async function getProductImages(productId: number | string) {
   })
 }
 
+/**商品绑定属性 */
+export async function bindProductAttr(productId: number | string, attr_code: string, csrfToken: string) {
+  return request<API.Response<[]>>(`/api/v1/stock/management/product/${productId}/bind/attr/`, {
+    method: 'POST',
+    data: {
+      attr_code: attr_code
+    },
+    headers: {
+      'X-CSRFToken': csrfToken
+    }
+  })
+}
+
 /**解绑商品的属性值 */
 export async function unbindProductAttr(productId: number | string, attrList: string[], csrfToken: string) {
   return request<API.Response<[]>>(`/api/v1/stock/management/product/${productId}/unbind/attr/`, {
@@ -27,5 +40,13 @@ export async function unbindProductAttr(productId: number | string, attrList: st
     headers: {
       'X-CSRFToken': csrfToken
     }
+  })
+}
+
+/**获取所有属性组和属性值 */
+export async function getAllAttrGroupValue(params: ProductModule.AttrGroupParams) {
+  return request<API.Response<ProductAttr.AttrGroup[]>>('/api/v1/stock/management/attribute/', {
+    method: 'GET',
+    params: params
   })
 }

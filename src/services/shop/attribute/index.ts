@@ -1,9 +1,10 @@
 import { request } from "@umijs/max";
 
+
 /**获取属性组 */
 export async function getAttributeGroupList() {
   return request<API.Response<API.PaginatorRes<ProductAttr.AttrGroup>>>('/api/v1/stock/management/attribute/', {
-    method: 'GET'
+    method: 'GET',
   })
 }
 

@@ -3,27 +3,31 @@ import { ActionType, ProTable, ProTableProps } from '@ant-design/pro-components'
 import { useIntl, useRequest } from '@umijs/max';
 import { Button, Card, message, Space } from 'antd';
 import { ExpandableConfig } from 'antd/es/table/interface';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import BindProductAttr from './BindProductAttr';
 
 
 type ProductAttrProps = {
-  productId?: string;
+  productid?: string;
   data?: ProductAttr.AttrGroup[];
-  csrfToken?: string;
-  onRefresh: () => void;
+  csrftoken?: string;
+  refresh: () => void;
 }
 const ProductAttrGroup: React.FC<ProductAttrProps> = (props) => {
   const attrAction = useRef<ActionType>();
+  const [ bindVisible, setBindVisible ] = useState(false);
   const intl = useIntl()
   const unbindAttr = useRequest((attrCodeList: string[]) => {
-    return unbindProductAttr(props.productId as string, attrCodeList,props.csrfToken as string)
+    return unbindProductAttr(props.productid as string, attrCodeList, props.csrftoken as string)
   }, {
     manual: true,
     onSuccess: res => {
       if (res.code === 200) {
         message.success(res.message);
-        props.onRefresh()
+        props.refresh()
+        return false
       }
+      message.error(res.message)
     }
   })
   const expandableAttr: ExpandableConfig<ProductAttr.AttrGroup> = {
@@ -41,7 +45,9 @@ const ProductAttrGroup: React.FC<ProductAttrProps> = (props) => {
           render(_, attr) {
             return (
               <Space wrap>
-                <Button danger type="primary" loading={unbindAttr.loading} onClick={() => unbindAttr.run([attr.value_code])}>商品解绑</Button>
+                <Button danger type="primary" loading={unbindAttr.loading} onClick={() => unbindAttr.run([attr.value_code])}>
+                  {intl.formatMessage({id: 'pages.attribute.unbind'})}
+                </Button>
               </Space>
             )
           },
@@ -91,7 +97,7 @@ const ProductAttrGroup: React.FC<ProductAttrProps> = (props) => {
       }
     },
     toolBarRender: () => [
-      <Button ghost key="bind_attr" type="primary">绑定新属性</Button>
+      <Button ghost key="bind_attr" type="primary" onClick={() => setBindVisible(true)}>绑定新属性</Button>
     ]
   }
   useEffect(() => {
@@ -103,6 +109,11 @@ const ProductAttrGroup: React.FC<ProductAttrProps> = (props) => {
       title="商品属性">
       <ProTable 
         {...productAttr}/>
+      <BindProductAttr
+        productid={props.productid}
+        csrftoken={props.csrftoken}
+        open={bindVisible}
+        onCancel={() => {setBindVisible(false);props.refresh()}} />
     </Card>
   )
 }
