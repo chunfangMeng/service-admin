@@ -60,4 +60,7 @@ export default {
   'menu.shop.attr.label': '商品属性组',
   'menu.shop.product': '商品',
   'menu.shop.product.detail': '商品详情',
+  'menu.config': '配置中心',
+  'menu.config.system': '系统配置',
+  'menu.config.system.currency': '货币配置',
 };

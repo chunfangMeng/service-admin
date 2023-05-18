@@ -86,6 +86,19 @@ export default [
     ],
   },
   {
+    path: '/config',
+    name: 'config',
+    routes: [{
+      path: '/config/system',
+      name: 'system',
+      routes: [{
+        path: '/config/system/currency',
+        name: 'currency',
+        component: './Config/System/Currency'
+      }]
+    }]
+  },
+  {
     name: 'personal',
     path: '/account/personal',
     component: './User/Personal',

@@ -60,4 +60,7 @@ export default {
   'menu.shop.attr.label': 'Attribute Group',
   'menu.shop.product': 'Product',
   'menu.shop.product.detail': 'Product Detail',
+  'menu.config': 'Config',
+  'menu.config.system': 'System Settings',
+  'menu.config.system.currency': 'Currency',
 };

@@ -1,7 +1,7 @@
 import { getProductSpecs } from "@/services/shop/product/list";
 import { EditableProTable, ProColumns } from "@ant-design/pro-components";
 import { useParams, useRequest } from "@umijs/max";
-import { Card } from "antd";
+import { Card, Space } from "antd";
 import React from "react";
 
 
@@ -14,7 +14,8 @@ const ProductSpecs: React.FC = () => {
   })
   const specsColumns: ProColumns<ProductModule.SpecsResults, any>[] = [{
     title: 'SKU',
-    dataIndex: 'sku'
+    dataIndex: 'sku',
+    readonly: true
   }, {
     title: 'SKU名称',
     dataIndex: 'sku_name'
@@ -22,15 +23,33 @@ const ProductSpecs: React.FC = () => {
     title: '价格',
     dataIndex: 'price',
     render: (_, entity) => (
-      <span>{entity.currency.mark} {entity.price}</span>
+      <span className="text-rose-600 font-semibold">{entity.currency?.mark} {entity.price}</span>
     ),
   }, {
     title: '创建时间',
     dataIndex: 'create_at',
-    editable: false
+    readonly: true
   }, {
     title: '创建人',
-    dataIndex: 'founder'
+    dataIndex: 'founder',
+    readonly: true
+  }, {
+    title: '操作',
+    dataIndex: 'actions',
+    valueType: 'option',
+    readonly: true,
+    render: (text, record, _, action) => (
+      <Space>
+        <a
+          key="editable"
+          onClick={() => {
+            action?.startEditable?.(record.id);
+          }}
+        >
+          编辑
+        </a>
+      </Space>
+    )
   }]
 
   return (
@@ -38,9 +57,10 @@ const ProductSpecs: React.FC = () => {
       className="mt-4"
       title="商品价格配置"
       loading={specsList.loading}>
-      <EditableProTable
+      <EditableProTable<ProductModule.SpecsResults>
         rowKey={'id'}
         columns={specsColumns}
+        recordCreatorProps={false}
         request={async () => {
           return {
             data: specsList.data?.data,
