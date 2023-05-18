@@ -5,6 +5,7 @@ import { useParams, useRequest } from '@umijs/max';
 import { Card, Image } from 'antd';
 import React, { useRef } from 'react';
 import ProductAttrGroup from './components/ProductAttrGroup';
+import ProductSpecs from './components/ProductSpecs';
 
 
 
@@ -50,6 +51,7 @@ const ProductDetail: React.FC = () => {
         data={productInfo.data?.data.attr_group}
         csrftoken={csrf.data?.data}
         refresh={() => productInfo.run()} />
+      <ProductSpecs />
       <Card 
         className='mt-4'
         title="商品图片">

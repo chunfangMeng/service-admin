@@ -50,3 +50,10 @@ export async function getAllAttrGroupValue(params: ProductModule.AttrGroupParams
     params: params
   })
 }
+
+/**获取商品价格配置 */
+export async function getProductSpecs(productId: string | number) {
+  return request<API.Response<ProductModule.SpecsResults[]>>(`/api/v1/stock/management/product/${productId}/specs/`, {
+    method: 'GET'
+  })
+}
