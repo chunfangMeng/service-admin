@@ -1,13 +1,9 @@
 import { getAllCurrency } from '@/services/config/system/currency';
 import { PageContainer, ParamsType, ProTable, ProTableProps } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
 import React from 'react';
 
 
 const CurrencySetting: React.FC = () => {
-  const currencyResult = useRequest(() => {
-    return getAllCurrency()
-  })
   const currencyTable: ProTableProps<SystemConfig.CurrencyItem, ParamsType> = {
     columns: [{
       title: '国家',
@@ -32,14 +28,18 @@ const CurrencySetting: React.FC = () => {
     }, {
       title: '关键词搜索',
       dataIndex: 'keyword',
-      hideInTable: true
+      hideInTable: true,
+      fieldProps: {
+        placeholder: '货币简称、货币名称、货币代码'
+      }
     }],
     rowKey: 'id',
     pagination: false,
-    request: async () => {
+    request: async (params) => {
+      const results = await getAllCurrency(params)
       return {
-        data: currencyResult.data?.data,
-        success: currencyResult.data?.code === 200
+        data: results.data,
+        success: results.code === 200
       }
     }
   }
