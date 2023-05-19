@@ -68,3 +68,27 @@ export async function bindProductPrice(productId: number, bindData: ProductModul
     }
   })
 }
+
+/**商品编辑价格 */
+export async function editProductSpecs(productId: number, data: ProductModule.EditSpecs, csrfToken: string) {
+  return request<API.Response<[]>>(`/api/v1/stock/management/product/${productId}/edit/specs/`, {
+    method: 'PATCH',
+    headers: {
+      'X-CSRFToken': csrfToken
+    },
+    data: data
+  })
+}
+
+/**商品删除价格 */
+export async function deleteProductSpecs(productId: number, specsId: number, csrfToken: string) {
+  return request<API.Response<[]>>(`/api/v1/stock/management/product/${productId}/unbind/specs/`, {
+    method: 'DELETE',
+    headers: {
+      'X-CSRFToken': csrfToken
+    },
+    data: {
+      specs_id: specsId
+    }
+  })
+}

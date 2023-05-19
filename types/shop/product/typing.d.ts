@@ -59,4 +59,6 @@ declare namespace ProductModule {
     sku: string;
     sku_name: string;
   }
+
+  type EditSpecs = Pick<SpecsResults, 'id' | 'sku_name' | 'price'>
 }
