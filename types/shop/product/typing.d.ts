@@ -52,4 +52,11 @@ declare namespace ProductModule {
     sku_name: string;
     status: number;
   }
+
+  type BindSpecsBody = {
+    currency: number;
+    price: number;
+    sku: string;
+    sku_name: string;
+  }
 }

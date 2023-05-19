@@ -3,9 +3,12 @@ import { EditableProTable, ProColumns } from "@ant-design/pro-components";
 import { useParams, useRequest } from "@umijs/max";
 import { Card, Space } from "antd";
 import React from "react";
+import BindPriceModal from "./BindPriceModal";
 
-
-const ProductSpecs: React.FC = () => {
+type ProductSpecsProps = {
+  csrftoken?: string;
+}
+const ProductSpecs: React.FC<ProductSpecsProps> = (props) => {
   const params = useParams();
   const specsList = useRequest(() => {
     return getProductSpecs(params.id as string)
@@ -61,6 +64,12 @@ const ProductSpecs: React.FC = () => {
         rowKey={'id'}
         columns={specsColumns}
         recordCreatorProps={false}
+        toolBarRender={() => [
+          <BindPriceModal 
+            key={"bindPrice"} 
+            csrftoken={props.csrftoken}
+            refresh={() => specsList.run()}/>
+        ]}
         request={async () => {
           return {
             data: specsList.data?.data,

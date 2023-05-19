@@ -57,3 +57,14 @@ export async function getProductSpecs(productId: string | number) {
     method: 'GET'
   })
 }
+
+/**商品绑定价格 */
+export async function bindProductPrice(productId: number, bindData: ProductModule.BindSpecsBody, csrfToken: string) {
+  return request<API.Response<[]>>(`/api/v1/stock/management/product/${productId}/related/specs/`, {
+    method: 'POST',
+    data: bindData,
+    headers: {
+      'X-CSRFToken': csrfToken
+    }
+  })
+}
