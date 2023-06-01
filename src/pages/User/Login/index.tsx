@@ -45,6 +45,11 @@ const Login: React.FC = () => {
     }
   };
 
+  const refreshCaptcha = () => {
+    captcha.run();
+    loginRef.current?.setFieldsValue({check_code: ''})
+  }
+
   const handleSubmit = async (values: ManagerUser.LoginParams) => {
     try {
       // 登录
@@ -188,7 +193,7 @@ const Login: React.FC = () => {
               <Image
                 className='h-10 max-h-10 mb-6'
                 preview={false}
-                onClick={() => captcha.run()}
+                onClick={refreshCaptcha}
                 src={typeof captcha.data === "undefined" ? undefined : `data:image/png;base64, ${captcha.data.data.base64_image}`}/>
             </Space>
           </>

@@ -32,7 +32,6 @@ export default [
     path: '/shop',
     name: 'shop',
     routes: [
-      { path: '/shop', redirect: 'shop/product/brand' },
       {
         path: '/shop/product/brand',
         name: 'brand',
@@ -58,14 +57,21 @@ export default [
         name: 'product.detail',
         component: './shop/Product/$id.tsx',
         hideInMenu: true
-      }
+      },
+      {
+        path: '/shop',
+        redirect: '/shop/product/brand',
+      },
     ],
   },
   {
     path: '/staff',
     name: 'staff',
     routes: [
-      { path: '/staff', redirect: 'staff/list' },
+      {
+        path: '/staff',
+        redirect: '/staff/list' 
+      },
       {
         path: '/staff/list',
         name: 'staff.list',
@@ -77,7 +83,10 @@ export default [
     path: '/member',
     name: 'member',
     routes: [
-      { path: '/member', redirect: 'member/list' },
+      {
+        path: '/member',
+        redirect: '/member/list' 
+      },
       {
         path: '/member/list',
         name: 'member.list',
@@ -89,9 +98,15 @@ export default [
     path: '/config',
     name: 'config',
     routes: [{
+      path: '/config',
+      redirect: '/config/system'
+    }, {
       path: '/config/system',
       name: 'system',
       routes: [{
+        path: '/config/system',
+        redirect: '/config/system/currency'
+      }, {
         path: '/config/system/currency',
         name: 'currency',
         component: './Config/System/Currency'
