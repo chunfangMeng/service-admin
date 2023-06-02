@@ -54,5 +54,5 @@ export default {
   'pages.sort.tip': '数字越大排名越靠前',
   'pages.search.keyword': '关键词',
   'pages.batch.upload': '批量上传',
-  'pages.attribute.unbind': '属性解绑'
+  'pages.attribute.unbind': '属性解绑',
 };

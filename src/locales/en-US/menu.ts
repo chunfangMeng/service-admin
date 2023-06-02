@@ -54,6 +54,7 @@ export default {
   'menu.shop.category': 'Category',
   'menu.staff': 'Staff',
   'menu.staff.staff.list': 'Staff List',
+  'menu.staff.staff.detail': 'Staff Detail',
   'menu.member': 'Member',
   'menu.member.member.list': 'Member List',
   'menu.personal': 'Personal Center',

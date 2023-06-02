@@ -54,6 +54,7 @@ export default {
   'menu.shop.category': '分类',
   'menu.staff': '员工管理',
   'menu.staff.staff.list': '员工列表',
+  'menu.staff.staff.detail': '员工详情',
   'menu.member': '会员管理',
   'menu.member.member.list': '会员列表',
   'menu.personal': '会员中心',

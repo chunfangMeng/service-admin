@@ -1,5 +1,8 @@
 import { getAllManagerStaff } from '@/services/manager/staff';
+import { RightOutlined } from '@ant-design/icons';
 import { PageContainer, ProTable, ProTableProps } from '@ant-design/pro-components';
+import { Link } from '@umijs/max';
+import { Button, Space } from 'antd';
 import React from 'react';
 
 
@@ -71,6 +74,18 @@ const StaffList: React.FC = () => {
       fieldProps: {
         placeholder: '工号、用户名、昵称'
       }
+    }, {
+      title: '操作',
+      dataIndex: 'actions',
+      valueType: 'option',
+      width: '16%',
+      render: (text, record) => (
+        <Space wrap>
+          <Button type="link" size="small" icon={<RightOutlined />}>
+            <Link to={`/staff/list/${record.id}`}>详情</Link>
+          </Button>
+        </Space>
+      )
     }],
     rowKey: 'id',
     search: {

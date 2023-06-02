@@ -57,5 +57,5 @@ export default {
   'pages.sort.tip': 'The higher the number, the higher the ranking',
   'pages.search.keyword': 'keyword',
   'pages.batch.upload': 'Batch Upload',
-  'pages.attribute.unbind': 'Attribute Unbind'
+  'pages.attribute.unbind': 'Attribute Unbind',
 };

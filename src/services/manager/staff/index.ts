@@ -7,3 +7,9 @@ export async function getAllManagerStaff(params?: ManagerStaff.StaffFilter) {
     params: params
   })
 }
+
+export async function getStaffDetail(staffId: number) {
+  return request<API.Response<ManagerStaff.StaffUser>>(`/api/v1/manager/staff/${staffId}/`, {
+    method: 'GET'
+  })
+}

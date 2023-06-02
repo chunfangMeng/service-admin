@@ -77,6 +77,12 @@ export default [
         name: 'staff.list',
         component: './Staff'
       },
+      {
+        path: '/staff/list/:id',
+        name: 'staff.detail',
+        component: './Staff/$id.tsx',
+        hideInMenu: true
+      },
     ],
   },
   {
