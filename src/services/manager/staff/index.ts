@@ -13,3 +13,23 @@ export async function getStaffDetail(staffId: number) {
     method: 'GET'
   })
 }
+
+/**获取员工权限 */
+export async function getStaffPermission(staffId: number) {
+  return request<API.Response<ManagerStaff.StaffPermission>>(`/api/v1/manager/staff/${staffId}/user/permission/`, {
+    method: 'GET'
+  })
+}
+
+/**设置员工权限 */
+export async function modifyPermissions(staffId: number, values: ManagerStaff.PermissionForm, csrfToken: string) {
+  return request<API.Response<[]>>(`/api/v1/manager/staff/${staffId}/permission/modify/`, {
+    method: 'put',
+    data: {
+      permissions: values
+    },
+    headers: {
+      'X-CSRFToken': csrfToken
+    }
+  })
+}

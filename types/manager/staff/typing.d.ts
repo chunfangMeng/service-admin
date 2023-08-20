@@ -20,4 +20,19 @@ declare namespace ManagerStaff {
     create_start_date?: string;
     create_end_date?: string;
   } & API.ResultListFilter
+
+  type Permission = {
+    label: string;
+    value: string;
+    children?: Permission[];
+  }
+
+  type StaffPermission = {
+    all_permission: Permission[];
+    has_permission: string[];
+  }
+
+  type PermissionForm = {
+    [key: string]: boolean | undefined;
+  }
 }
