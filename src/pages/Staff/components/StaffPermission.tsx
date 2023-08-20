@@ -3,6 +3,7 @@ import { getStaffPermission, modifyPermissions } from '@/services/manager/staff'
 import { ProCard, ProForm, ProFormCheckbox, ProFormInstance } from '@ant-design/pro-components';
 import { useParams, useRequest } from '@umijs/max';
 import { message } from 'antd';
+import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import React, { useRef, useState } from 'react';
 
 
@@ -57,8 +58,41 @@ const StaffPermission: React.FC = () => {
   }
 
   const onPermissionFinish = async (values: ManagerStaff.PermissionForm) => {
-    console.log({...formatPermission(), ...values})
     modifyPermission.run({...formatPermission(), ...values});
+  }
+
+  const onParentChange = (e: CheckboxChangeEvent) => {
+    let changePermission: ManagerStaff.PermissionForm = {}
+    allPermission.forEach(item => {
+      item.children?.forEach(subItem => {
+        changePermission[subItem.value] = e.target.checked
+      })
+    })
+    formRef.current?.setFieldsValue(changePermission);
+  }
+
+  const onChildChange = (e: CheckboxChangeEvent) => {
+    if (e.target.checked) {
+      allPermission.forEach(item => {
+        let isHasAll = true;
+        item.children?.forEach(subItem => {
+          if (!formRef.current?.getFieldValue(subItem.value)) {
+            isHasAll = false
+          }
+        })
+        if (isHasAll) formRef.current?.setFieldsValue(Object.fromEntries([[item.value, true]]));
+      })
+      return false
+    }
+    allPermission.forEach(item => {
+      let isHasAll = false;
+      item.children?.forEach(subItem => {
+        if (formRef.current?.getFieldValue(subItem.value)) {
+          isHasAll = true
+        }
+      })
+      if (!isHasAll) formRef.current?.setFieldsValue(Object.fromEntries([[item.value, false]]));
+    })
   }
   return (
     <ProCard
@@ -83,7 +117,10 @@ const StaffPermission: React.FC = () => {
               <ProFormCheckbox.Group
                 label={
                   <ProFormCheckbox
-                    name={item.value}>
+                    name={item.value}
+                    fieldProps={{
+                      onChange: onParentChange
+                    }}>
                     {item.label}
                   </ProFormCheckbox>
               }>
@@ -92,7 +129,10 @@ const StaffPermission: React.FC = () => {
                     return (
                       <ProFormCheckbox 
                         key={children.value} 
-                        name={children.value}>
+                        name={children.value}
+                        fieldProps={{
+                          onChange: onChildChange
+                        }}>
                         {children.label}
                       </ProFormCheckbox>
                     )
