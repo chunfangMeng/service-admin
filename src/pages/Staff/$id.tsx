@@ -1,25 +1,35 @@
 import { getStaffDetail } from '@/services/manager/staff';
-import { PageContainer, ProCard, ProDescriptions } from '@ant-design/pro-components';
-import { useParams } from '@umijs/max';
+import { PageContainer, ProCard, ProDescriptions, ProDescriptionsActionType } from '@ant-design/pro-components';
+import { useParams, useRequest } from '@umijs/max';
 import { Button } from 'antd';
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import StaffInfo from './components/StaffInfo';
 import StaffPermission from './components/StaffPermission';
 
 
 const StaffDetail: React.FC = () => {
   const params = useParams();
+  const actionRef = useRef<ProDescriptionsActionType>();
+  const [ staffVisible, setStaffVisible ] = useState(false);
+  const [ staffInfo, setStaffInfo ] = useState<ManagerStaff.StaffUser>();
+  const staffRequest = useRequest(() => {
+    return getStaffDetail(Number(params.id))
+  }, {
+    onSuccess: res => {
+      if (res.code === 200) {
+        setStaffInfo(res.data);
+        actionRef.current?.reload();
+      }
+    }
+  })
   return (
     <PageContainer>
       <ProCard hoverable>
         <ProDescriptions
+          actionRef={actionRef}
           title="员工信息"
-          request={async () => {
-            const results = await getStaffDetail(Number(params.id))
-            return {
-              success: results.code === 200,
-              data: results.data
-            }
-          }}
+          loading={staffRequest.loading}
+          dataSource={staffRequest.data?.data}
           columns={[
             {
               title: '工号',
@@ -74,14 +84,18 @@ const StaffDetail: React.FC = () => {
               title: '操作',
               valueType: 'option',
               render: () => [
-                <Button ghost key="modifyInfo" type="primary">修改个人信息</Button>,
-                <Button ghost key="modifyPwd" type="primary">修改密码</Button>,
+                <Button ghost key="modifyInfo" type="primary" onClick={() => setStaffVisible(true)}>修改个人信息</Button>,
+                <Button danger ghost key="modifyPwd" type="primary">修改密码</Button>,
               ]
             }
           ]} />
       </ProCard>
 
       <StaffPermission />
+      <StaffInfo 
+        open={staffVisible}
+        onOpenChange={(open) => setStaffVisible(open)}
+        staffinfo={staffInfo}/>
     </PageContainer>
   )
 }

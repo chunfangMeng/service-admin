@@ -33,3 +33,11 @@ export async function modifyPermissions(staffId: number, values: ManagerStaff.Pe
     }
   })
 }
+
+/**修改个人信息 */
+export async function modifyStaffInfo(staffId: number, values: ManagerStaff.BaseInfo) {
+  return request<API.Response<[]>>(`/api/v1/manager/staff/${staffId}/modify/info/`, {
+    method: 'put',
+    data: values
+  })
+}

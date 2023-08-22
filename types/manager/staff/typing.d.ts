@@ -35,4 +35,13 @@ declare namespace ManagerStaff {
   type PermissionForm = {
     [key: string]: boolean | undefined;
   }
+
+  type BaseInfo = {
+    nickname: string;
+    phone: string;
+    gender: number;
+    user: {
+      email: string;
+    }
+  }
 }
