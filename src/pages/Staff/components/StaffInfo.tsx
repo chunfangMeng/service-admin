@@ -19,6 +19,7 @@ const StaffInfo: React.FC<StaffInfoProps> = (props) => {
     onSuccess: res => {
       if (res.code === 200) {
         message.success(res.message);
+        props.onOpenChange(false);
         return false;
       }
       message.error(res.message);
@@ -42,11 +43,17 @@ const StaffInfo: React.FC<StaffInfoProps> = (props) => {
       <ProFormText
         label="昵称"
         name="nickname"
-        placeholder={"请输入昵称"} />
+        placeholder={"请输入昵称"}
+        rules={[
+          {required: true, message: '昵称不能为空'}
+        ]} />
       <ProFormText
         label="联系电话"
         name="phone"
-        placeholder={"请输入联系电话"} />
+        placeholder={"请输入联系电话"}
+        rules={[
+          {required: true, message: '联系电话不能为空'}
+        ]} />
       <ProFormRadio.Group
         label="性别"
         name="gender"
@@ -55,11 +62,18 @@ const StaffInfo: React.FC<StaffInfoProps> = (props) => {
           {label: '男', value: 1},
           {label: '女', value: 2},
           {label: '保密', value: 3}
+        ]}
+        rules={[
+          {required: true, message: '请选择性别'}
         ]} />
       <ProFormText
         label="电子邮箱"
         name={['user', 'email']}
-        placeholder="电子邮箱" />
+        placeholder="电子邮箱"
+        rules={[
+          {required: true, message: '请输入电子邮箱'},
+          {pattern: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/, message: '电子邮箱格式错误'}
+        ]} />
     </DrawerForm>
   )
 }

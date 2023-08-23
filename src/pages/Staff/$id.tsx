@@ -22,6 +22,10 @@ const StaffDetail: React.FC = () => {
       }
     }
   })
+  const onInfoVisible = (open: boolean) => {
+    if (!open) staffRequest.run();
+    setStaffVisible(open);
+  }
   return (
     <PageContainer>
       <ProCard hoverable>
@@ -94,7 +98,7 @@ const StaffDetail: React.FC = () => {
       <StaffPermission />
       <StaffInfo 
         open={staffVisible}
-        onOpenChange={(open) => setStaffVisible(open)}
+        onOpenChange={onInfoVisible}
         staffinfo={staffInfo}/>
     </PageContainer>
   )
