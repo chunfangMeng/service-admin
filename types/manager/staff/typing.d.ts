@@ -44,4 +44,9 @@ declare namespace ManagerStaff {
       email: string;
     }
   }
+
+  interface ModifyPwd {
+    password: string;
+    confirm_pwd: string;
+  }
 }

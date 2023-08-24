@@ -41,3 +41,11 @@ export async function modifyStaffInfo(staffId: number, values: ManagerStaff.Base
     data: values
   })
 }
+
+/**修改员工登录密码 */
+export async function modifyLoginPwd(staffId: number, values: ManagerStaff.ModifyPwd) {
+  return request<API.Response<[]>>(`/api/v1/manager/staff/${staffId}/modify/pwd/`, {
+    method: 'post',
+    data: values
+  })
+}

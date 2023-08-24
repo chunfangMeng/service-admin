@@ -3,6 +3,7 @@ import { PageContainer, ProCard, ProDescriptions, ProDescriptionsActionType } fr
 import { useParams, useRequest } from '@umijs/max';
 import { Button } from 'antd';
 import React, { useRef, useState } from 'react';
+import ModifyPwd from './components/ModifyPwd';
 import StaffInfo from './components/StaffInfo';
 import StaffPermission from './components/StaffPermission';
 
@@ -11,6 +12,7 @@ const StaffDetail: React.FC = () => {
   const params = useParams();
   const actionRef = useRef<ProDescriptionsActionType>();
   const [ staffVisible, setStaffVisible ] = useState(false);
+  const [ pwdVisible, setPwdVisible ] = useState(false);
   const [ staffInfo, setStaffInfo ] = useState<ManagerStaff.StaffUser>();
   const staffRequest = useRequest(() => {
     return getStaffDetail(Number(params.id))
@@ -89,7 +91,7 @@ const StaffDetail: React.FC = () => {
               valueType: 'option',
               render: () => [
                 <Button ghost key="modifyInfo" type="primary" onClick={() => setStaffVisible(true)}>修改个人信息</Button>,
-                <Button danger ghost key="modifyPwd" type="primary">修改密码</Button>,
+                <Button danger ghost key="modifyPwd" type="primary" onClick={() => setPwdVisible(true)}>修改密码</Button>,
               ]
             }
           ]} />
@@ -100,6 +102,10 @@ const StaffDetail: React.FC = () => {
         open={staffVisible}
         onOpenChange={onInfoVisible}
         staffinfo={staffInfo}/>
+      <ModifyPwd
+        open={pwdVisible}
+        onOpenChange={(open) => setPwdVisible(open)}
+        staffinfo={staffInfo} />
     </PageContainer>
   )
 }
